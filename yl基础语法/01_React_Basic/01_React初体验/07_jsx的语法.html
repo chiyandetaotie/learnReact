@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="./lib/react.js"></script>
+  <script src="./lib/react_dom.js"></script>
+  <script src="./lib/babel.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: "Hello App",
+          names: ["abc", "cba"],
+          friend: {
+            name: "kobe"
+          }
+        }
+
+        this.btn1Click = this.btn1Click.bind(this)
+      }
+
+      render() {
+        // return React.createElement("div", {className: "aaa"}, "哈哈哈")
+        return React.createElement("div", {className: "aaa"}, 
+        [
+          'sdsdsdsd',
+          React.createElement('div', { className: 'bbb'}, 'ahahah'),
+          React.createElement('div', { className: 'ccc'}, 'cvcvcv')
+        ])
+      }
+
+      btn1Click(event, name, age) {
+        console.log(this, event, name, age);
+      }
+    }
+
+    // 2.渲染根组件
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App/>)
+  </script>
+  
+</body>
+</html>

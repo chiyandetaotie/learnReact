@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script src="./lib/react.js"></script>
+  <script src="./lib/react_dom.js"></script>
+  <script src="./lib/babel.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component{
+      constructor() {
+        super()
+        this.state = {
+          counter: 100,
+          message: "Hello World",
+          names: ["abc", "cba", "nba"],
+
+          aaa: undefined,
+          bbb: null,
+          ccc: true,
+
+          friend: { name: "kobe" },
+
+          firstName: "kobe",
+          lastName: "bryant",
+
+          age: 20,
+
+          movies: ["流浪地球", "星际穿越", "独行月球"]
+        }
+      }
+
+      getMoviesLi() {
+        return this.state.movies.map(m => <li key={m}>{m}</li>)
+      }
+
+      render() {
+        const { message, names, counter } = this.state
+        const { aaa, bbb, ccc } = this.state
+        const { friend } = this.state
+
+        const { firstName, lastName } = this.state
+        const fullName = firstName + " " + lastName
+        const { age } = this.state
+
+        const ageText = age > 18 ? '成人' : '小孩'
+        const liEles = this.state.movies.map(item => <li key={item}> {item} </li>)
+
+        return (
+          <div>
+
+            <h2>{ageText}</h2>
+            <h2>{age >= 18 ? "成年人": "未成年人"}</h2>
+            
+            <ul>
+              { liEles }
+            </ul>
+
+            -------------
+            <ul>
+              { this.getMoviesLi() }
+            </ul>
+
+            -------------
+            <ul>
+              { this.state.movies.map(m => <li key={m}>{m}</li>) }
+            </ul>
+
+
+          </div>
+        )
+      }
+    }
+
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+  </script>
+  
+</body>
+</html>

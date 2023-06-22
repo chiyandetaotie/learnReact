@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计数器</title>
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          title: "哈哈哈",
+          imgURL: "https://ts1.cn.mm.bing.net/th/id/R-C.95bc299c3f1f0e69b9eb1d0772b14a98?rik=W5QLhXiERW4nLQ&riu=http%3a%2f%2f20178405.s21i.faiusr.com%2f2%2fABUIABACGAAgoeLO-wUo4I3o2gEw8Qs4uAg.jpg&ehk=N7Bxe9nqM08w4evC2kK6yyC%2bxIWTjdd6HgXsQYPbMj0%3d&risl=&pid=ImgRaw&r=0",
+          href: "https://www.baidu.com",
+
+          isActive: true,
+          objStyle: {color: "red", fontSize: "30px"}
+        }
+      }
+
+      render() {
+        const { title, imgURL, href, isActive, objStyle } = this.state
+        const className = `abc cba ${isActive ? 'active' : ''}`
+        const classList = ['abc', 'cba']
+        if(isActive) {
+          classList.push('active')
+        }
+
+
+        return (
+          <div>
+            <h2 title={title}>我是title</h2>
+            <div className={className}>激活我的</div>
+            <div className={classList.join(" ")}>激活我的2</div>
+
+            <h2 style={ objStyle }>呵呵呵</h2>
+            <h2 style={{ color: 'purple', fontSize: '30px'}}>嘻嘻嘻</h2>
+           
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并且渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App/>)
+  </script>
+
+</body>
+</html>

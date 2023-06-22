@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <style>
+    .isActive {
+      color: red;
+      font-size: 20px
+    }
+  </style>
+
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          movies: ['1111' , '222', '33', '4'],
+          itemIndex: 0,
+
+        }
+      }
+
+      itemClick (e, index) {
+        console.log('itemClick >> e:', e);
+        console.log('itemClick >> index:', index);
+        this.setState({ itemIndex: index})
+
+      }
+      render() {
+
+        const { movies, itemIndex } = this.state
+        return (
+          <div>
+            <div>电影呢？</div>
+            <div>
+              <ul>
+                { movies.map((item, index) => 
+                  {
+                    return (
+                      <li 
+                        key={ index }
+                        onClick = { (e) => this.itemClick(e, index)}
+                        className = { itemIndex === index ? 'isActive': ''}
+                      > 
+                        { item }
+                      </li>
+                    )
+                  }
+                  ) 
+                }
+              </ul>
+            
+            </div>
+          </div>
+
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+  </script>
+</body>
+</html>

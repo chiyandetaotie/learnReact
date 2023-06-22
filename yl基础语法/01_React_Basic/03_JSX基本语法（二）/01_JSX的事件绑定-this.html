@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+  
+  <script type="text/babel">
+    /*
+      this 的四种绑定规则：
+        1.默认绑定 独立执行 foo()
+        2.隐式绑定 obj.foo() -> obj
+        3.显示绑定 call/ apply/ bind/ foo.call('aaa') -> String('aaa')
+        4.new绑定 new Foo() -> 创建一个新对象，并且赋值给 this
+    */
+
+    class App extends React.Component {
+      name = "App"
+      constructor() {
+        super()
+        this.state = {
+          message: "Hello World",
+          counter: 100
+        },
+        this.btn2Click = this.btn2Click.bind(this)
+      }
+
+      btn1Click() {
+        this.setState({ counter: this.state.counter + 1 })
+      }
+      btn2Click() {
+        this.setState({ counter: this.state.counter + 1 })
+      }
+      btn3Click() {
+        // console.log('bnt3Click >>> this:', this);
+        this.setState({ counter: this.state.counter + 1})
+      }
+
+      render() {
+        const { message, counter } = this.state
+        return (
+          <div>
+            <div> { message }</div>
+            <div>当前计数：{ counter }</div>
+            <button onClick={ this.btn1Click.bind(this) }> 按钮1 </button>
+            <button onClick={ this.btn2Click }> 按钮2 </button>
+            <button onClick={ () => { this.btn3Click() } }> 按钮3 </button>
+          </div>
+        )
+      }
+    }
+
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+  </script>
+</body>
+</html>

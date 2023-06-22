@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script src="./lib/babel.js"></script>
+  <script src="./lib/react.js"></script>
+  <script src="./lib/react_dom.js"></script>
+  
+  <script type="text/babel">
+    function foo() {
+      console.log('this:', this);
+    }
+    foo()
+
+    class App extends React.Component{
+      constructor() {
+        super()
+        this.state = {
+          counter: 0
+        }
+      }
+
+      increate(n, e) {
+        console.log('n:', n);
+        console.log('e:', e);
+        this.setState({
+          counter: this.state.counter + 1
+        })
+      }
+
+      decreate() {
+        this.setState({
+          counter: this.state.counter - 1
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h2> counter: { this.state.counter }</h2>
+            <button onClick={() => this.increate(1) }>+1</button>
+            <button onClick={() => this.decreate(-1) }>-1</button>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          students: [
+            {id: 1, name: '111', age: 11, score: 111},
+            {id: 2, name: '222', age: 22, score: 222},
+            {id: 3, name: '333', age: 33, score: 333},
+            {id: 4, name: '444', age: 44, score: 444},
+            {id: 5, name: '555', age: 55, score: 555},
+            {id: 6, name: '666', age: 66, score: 666},
+          ]
+        }
+      }
+      render() {
+        const { students } = this.state
+        return (
+          <div>
+            <div>
+              <ul>
+                {
+                  students.filter(item => {
+                    return item.score > 222
+                  })
+                  .slice(0,2)
+                  .map((item) => {
+                    return (
+                      <li key={item.id}>{item.id} - {item.name}</li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App/>)
+
+  </script>
+</body>
+</html>
